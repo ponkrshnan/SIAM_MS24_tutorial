@@ -14,6 +14,5 @@ pathlib~=1.0.1
 beartype
 setuptools~=65.5.1
 torch==2.2.1
-uqpy~=4.1.0
 hypothesis~=6.99.6
 torchinfo~=1.8.0
