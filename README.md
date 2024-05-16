@@ -8,5 +8,8 @@ The following examples are impelemented:
 * **Bayesian Neural Networks**
   
 ## Code executions
-All the codes in this repository can be executed through binders. 
+All the codes in this repository can be executed through binders. To execute
+* Launch the binder: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ponkrshnan/SIAM_MS24_tutorial.git/HEAD)
+* Open a terminal and run install.sh with the following command: ```sh install.sh```
+* Run the jupyter notebooks
 
