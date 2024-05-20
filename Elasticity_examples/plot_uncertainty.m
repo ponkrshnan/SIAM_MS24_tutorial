@@ -3,7 +3,7 @@ clc;
 close all
 
 curDir = pwd;
-folder_name = [curDir '/Predictions_Source'];
+folder_name = [curDir '/Predictions_Bayesian'];
 if exist(folder_name,'dir')
     rmdir(folder_name,'s');
 end
@@ -94,8 +94,17 @@ for idx = 1:N_data
         xlabel('$x$', 'interpreter', 'latex', 'fontsize', 14);
         ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
         set(gca, 'YTick', [0,0.5,1], 'YTickLabel', [0,0.5,1])
-        
-        subplot(2,5,4);
+
+        ax4 = subplot(2,5,4);
+        pdeplot(model,'XYData',ux_sigma );
+        colormap(jet); axis equal;
+        xlim([0,1]); ylim([0,1])
+        title('Uncertainty ($\sigma$)','interpreter', 'latex', 'fontsize', 14);
+        xlabel('$x$', 'interpreter', 'latex', 'fontsize', 14);
+        ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
+        box on;
+
+        ax5 = subplot(2,5,5);
         pdeplot(model,'XYData',abs(ux_truth-ux_pred) );
         colormap(jet); axis equal;
         xlim([0,1]); ylim([0,1])
@@ -104,14 +113,7 @@ for idx = 1:N_data
         ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
         box on;
 
-        subplot(2,5,5);
-        pdeplot(model,'XYData',ux_sigma );
-        colormap(jet); axis equal;
-        xlim([0,1]); ylim([0,1])
-        title('Sigma','interpreter', 'latex', 'fontsize', 14);
-        xlabel('$x$', 'interpreter', 'latex', 'fontsize', 14);
-        ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
-        box on;
+
         
         clim_min = min(min(uy_pred),min(uy_truth));
         clim_max = max(max(uy_pred),max(uy_truth));
@@ -137,7 +139,18 @@ for idx = 1:N_data
         ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
         set(gca, 'YTick', [0,0.5,1], 'YTickLabel', [0,0.5,1])
         
-        subplot(2,5,9);
+
+        ax9 = subplot(2,5,9);
+        pdeplot(model,'XYData', uy_sigma );
+        colormap(jet);
+        axis equal;
+        xlim([0,1]); ylim([0,1])
+        title('Uncertainty ($\sigma$)','interpreter', 'latex', 'fontsize', 14);
+        xlabel('$x$', 'interpreter', 'latex', 'fontsize', 14);
+        ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
+        box on;
+
+        ax10 = subplot(2,5,10);
         pdeplot(model,'XYData',abs(uy_truth-uy_pred) );
         colormap(jet);
         axis equal;
@@ -146,17 +159,10 @@ for idx = 1:N_data
         xlabel('$x$', 'interpreter', 'latex', 'fontsize', 14);
         ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
         box on;
-
-        subplot(2,5,10);
-        pdeplot(model,'XYData', uy_sigma );
-        colormap(jet);
-        axis equal;
-        xlim([0,1]); ylim([0,1])
-        title('Sigma','interpreter', 'latex', 'fontsize', 14);
-        xlabel('$x$', 'interpreter', 'latex', 'fontsize', 14);
-        ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
-        box on;
-        
+        colormap(ax4,parula)
+        colormap(ax5,parula)
+        colormap(ax9,parula)
+        colormap(ax10,parula)
         saveas(gcf, [folder_name '/TestCase', num2str(idx),'.png'])
     end
 end

@@ -3,7 +3,7 @@ clc;
 close all
 
 curDir = pwd;
-folder_name = [curDir '/Predictions_Source'];
+folder_name = [curDir '/Predictions_POD'];
 if exist(folder_name,'dir')
     rmdir(folder_name,'s');
 end
@@ -31,7 +31,7 @@ generateMesh(model,'Hmax',radius/4);
 % -------------------------------------------
 % 100 testing samples
 N_data = 100;
-resultFileName = ['Best_Elastic_plate.mat'];
+resultFileName = ['POD_Elastic_plate.mat'];
 Result = load(resultFileName);
 % to store the l2 errors
 L2_mesh = zeros(N_data,2);
@@ -93,7 +93,7 @@ for idx = 1:N_data
         ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
         set(gca, 'YTick', [0,0.5,1], 'YTickLabel', [0,0.5,1])
         
-        subplot(2,4,4);
+        ax4 = subplot(2,4,4);
         pdeplot(model,'XYData',abs(ux_truth-ux_pred) );
         colormap(jet); axis equal;
         xlim([0,1]); ylim([0,1])
@@ -126,7 +126,7 @@ for idx = 1:N_data
         ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
         set(gca, 'YTick', [0,0.5,1], 'YTickLabel', [0,0.5,1])
         
-        subplot(2,4,8);
+        ax8 = subplot(2,4,8);
         pdeplot(model,'XYData',abs(uy_truth-uy_pred) );
         colormap(jet);
         axis equal;
@@ -135,7 +135,8 @@ for idx = 1:N_data
         xlabel('$x$', 'interpreter', 'latex', 'fontsize', 14);
         ylabel('$y$', 'interpreter', 'latex', 'fontsize', 14);
         box on;
-        
+        colormap(ax4,parula)
+        colormap(ax8,parula)
         saveas(gcf, [folder_name '/TestCase', num2str(idx),'.png'])
     end
 end
