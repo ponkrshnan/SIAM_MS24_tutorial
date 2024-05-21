@@ -12,6 +12,7 @@ This repository contains implementations of Bayesian training methods for neural
 Physics-Informed Neural Networks (PINNs), and several flavors of Deep Operator Networks.
 
 The repository is organized as follows:
+- 'VI_examples` contains example code from the first session on variational inference
 - `Bayesian_examples` contains implementations of three Bayesian training methods.
   - `Bayesian_MCD.ipynb` is an example of Monte Carlo Dropout (MCD).
   - `Bayesian_VI.ipynb` is an example of Variational Inference (VI).
